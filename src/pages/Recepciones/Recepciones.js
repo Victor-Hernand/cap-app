@@ -2,29 +2,36 @@ import React, { useEffect, useState } from "react";
 import BasicLayout from "../../components/BasicLayout";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
-import { getClientes} from "../../services/recepcionesService";
+import Search from "../../components/Search";
+import { getClientes, searchReception } from "../../services/recepcionesService";
+import RecepcionesCard from "./RecepcionesCard";
 
 const Recepciones = () => {
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState();
+    const [notFound, setNotFound] = useState(false);
+    const [searching, setSearching] = useState(false);
 
     const getClients = async () => {
         try {
             setLoading(true);
             const result = await getClientes(25, 25 * page);
-           
-            setData(result);
+            //console.log(result.reverse().slice(0,5));
+            setData(result.reverse().slice(0,49));
             setTotal(Math.ceil(result.length / 25));
             setLoading(false);
+            setNotFound(false);
         } catch (error) {
             console.log(error);
         }
     }
     useEffect(() => {
-        getClients();
-    }, []);
+        if (!searching) {
+            getClients();
+        }
+    }, [page]);
     /*useEffect(() => {
         getClients();
     }, [page]);
@@ -38,6 +45,27 @@ const Recepciones = () => {
         const nextPage = Math.min(page + 1, total - 1);
         setPage(nextPage);
     }; */
+
+    const onSearch = async (param) => {
+        if (!param) {
+            return getClients();
+        }
+        setLoading(true);
+        setNotFound(false);
+        setSearching(true);
+        const result = await searchReception(param);
+        if (result.length == 0) {
+            setNotFound(true);
+            setLoading(false);
+            return;
+        } else {
+            setData(result.reverse().slice(0,49));
+            //setPage(0);
+            //setTotal(1);
+        }
+        setLoading(false);
+        setSearching(false);
+    };
 
     return (
         <BasicLayout>
@@ -53,35 +81,21 @@ const Recepciones = () => {
                     </svg>
                 </button>
             </div>
-
-            {loading ? (
-                <Loading />
+            <Search onSearch={onSearch} />
+            {notFound ? (
+                <section className="flex items-center h-full p-16 dark:bg-gray-900 dark:text-gray-100">
+                    <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+                        <div className="max-w-md text-center">
+                            <p className="text-2xl font-semibold md:text-3xl">Lo sentimos, no se encontraron resultados para esta búsqueda</p>
+                            <p className="mt-4 mb-8 dark:text-gray-400">Asegúrate de escribir correctamente el nombre del cliente o número de factura</p>
+                        </div>
+                    </div>
+                </section>
             ) : (
-                <div className="pl-3 mt-4 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 bg-slate-50">
-
-                    {data.map((item, idx) => {
-                        return (
-                            <div key={idx} className="bg-white max-w-sm rounded overflow-hidden shadow-lg my-2 mr-2">
-                                {/*<img className="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains" />*/}
-                                <div className="px-6 py-4">
-                                    <div className="mb-2">
-                                        <p className="font-bold text-lg  ">Cliente: {item.client_name}</p>
-                                        <p className="text-lg">N. Factura: {item.invoice_number}</p>
-                                    </div>
-                                    <p className="text-gray-700 text-base">
-                                        {item.reception_number}
-                                    </p>
-                                </div>
-                                <div className="px-6 pt-4 pb-2">
-                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Identificador: {item.id}</span>
-                                    
-                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Recepción: {item.reception_date}</span>
-                                </div>
-                            </div>
-
-                        );
-                    })}
-                </div>
+                <RecepcionesCard
+                    loading={loading}
+                    data={data}
+                />
             )}
             {/*<Pagination
                 page={page + 1}
