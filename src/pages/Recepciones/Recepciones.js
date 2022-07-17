@@ -5,6 +5,8 @@ import Pagination from "../../components/Pagination";
 import Search from "../../components/Search";
 import { getClientes, searchReception } from "../../services/recepcionesService";
 import RecepcionesCard from "./RecepcionesCard";
+import { useContext } from "react";
+import { UserContext } from "../../context/user";
 
 const Recepciones = () => {
     const [page, setPage] = useState(0);
@@ -13,7 +15,7 @@ const Recepciones = () => {
     const [data, setData] = useState();
     const [notFound, setNotFound] = useState(false);
     const [searching, setSearching] = useState(false);
-
+    const [user, setUser] = useContext(UserContext);
     const getClients = async () => {
         try {
             setLoading(true);
@@ -30,6 +32,11 @@ const Recepciones = () => {
     useEffect(() => {
         if (!searching) {
             getClients();
+        }
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user){
+            setUser(user);
+            console.log(user)
         }
     }, [page]);
     /*useEffect(() => {
