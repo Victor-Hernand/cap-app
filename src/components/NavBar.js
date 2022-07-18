@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../context/user';
 const NavBar = () => {
+    const [user, setUser] = useContext(UserContext);
     const [hidde, setHidde] = useState(false);
-
+    const postLogout = () => {
+        localStorage.removeItem("user");
+        setUser(null);
+    }
     const handleMenu = () => {
         setHidde(!hidde);
     }
@@ -14,17 +20,19 @@ const NavBar = () => {
             <div className="flex items-center justify-between h-16">
                 <div className=" flex items-center">
                     <a className="flex-shrink-0" href="/">
-                        <img className="h-8 w-8" src="/icons/rocket.svg" alt="Workflow"/>
+                        <img className="w-16" src="https://cap.miposvirtual.com/images/logo.png" alt="Workflow"/>
                     </a>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
-                            <a className="text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">
+                            <Link className="text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/recepciones">
                                 Recepciones
-                            </a>
-                            <a className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">
+                            </Link>
+                            <Link className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/diagnosticos">
                                 Diagnóstico
-                            </a>
-                            
+                            </Link>
+                            <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
+                                Cerrar Sesion
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -44,13 +52,16 @@ const NavBar = () => {
         </div>
         <div className={hidde ? "md:hidden" : "hidden"}>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#">
+                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/recepciones">
                     Recepciones
-                </a>
-                <hr className="text-current" />
-                <a className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#">
+                </Link>
+                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/diagnosticos">
                     Diagnóstico
-                </a>
+                </Link>
+                <hr className="text-current" />
+                <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
+                    Cerrar Sesion
+                </button>
             </div>
         </div>
     </nav>
