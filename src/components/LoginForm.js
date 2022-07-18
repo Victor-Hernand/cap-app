@@ -1,8 +1,8 @@
-import {postLogin} from '../services/auth';
+import {postLogin} from '../services/Auth';
 import  ToastNotification from './ToastNotification';
 import { useContext } from 'react';
-import { UserContext } from '../context/user'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/User';
+import {  useNavigate } from 'react-router-dom';
 export default function LoginForm() {
     const [user, setUser] = useContext(UserContext)
     const navigate = useNavigate()

@@ -24,3 +24,19 @@ export const searchReception = async (client_name_or_invoice_number) => {
     }
 
 }
+
+
+export const postReception = async (formData) => {
+    try {
+        let url = `${baseUrl}/receptions`
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+
+}
