@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../context/user';
+import { UserContext } from '../context/User';
 const NavBar = () => {
     const [user, setUser] = useContext(UserContext);
     const [hidde, setHidde] = useState(false);

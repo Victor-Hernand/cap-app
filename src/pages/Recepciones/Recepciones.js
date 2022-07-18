@@ -6,7 +6,7 @@ import Search from "../../components/Search";
 import { getClientes, searchReception } from "../../services/recepcionesService";
 import RecepcionesCard from "./RecepcionesCard";
 import { useContext } from "react";
-import { UserContext } from "../../context/user";
+import { UserContext } from "../../context/User";
 import { Link } from "react-router-dom";
 
 const Recepciones = () => {
