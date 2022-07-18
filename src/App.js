@@ -1,5 +1,4 @@
 import './App.css';
-import Recepciones from './pages/Recepciones/Recepciones';
 import ReceptionPage from './pages/Recepciones/ReceptionPage';
 import LoginPage from './pages/Auth/LoginPage';
 import NotFound from './pages/NotFound';
@@ -8,6 +7,7 @@ import React from "react";
 import { UserProvider } from './context/User';
 import { ReceptionProvider } from './context/Reception';
 import { AuthMiddleware } from './components/AuthMiddleware';
+import Receptions from './pages/Recepciones/Receptions';
 const App = () => {
   
   return (
@@ -16,7 +16,7 @@ const App = () => {
       <ReceptionProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />}/>
-          <Route path="/" element={<AuthMiddleware><Recepciones /></AuthMiddleware>}/>
+          <Route path="/" element={<AuthMiddleware><Receptions /></AuthMiddleware>}/>
           <Route path="/receptions/edit" element={<AuthMiddleware><ReceptionPage /></AuthMiddleware>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>

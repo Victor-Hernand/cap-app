@@ -4,11 +4,10 @@ import BasicLayout from "../../components/BasicLayout";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
 import Search from "../../components/Search";
-import { getClientes, searchReception } from "../../services/recepcionesService";
-import RecepcionesCard from "./RecepcionesCard";
+import { getReceptions, searchReception } from "../../services/ReceptionService";
 import { useContext } from "react";
 import { UserContext } from "../../context/User";
-import { Link } from "react-router-dom";
+import CardReception from "./CardReceptions";
 
 const Receptions = () => {
     const [page, setPage] = useState(0);
@@ -18,10 +17,11 @@ const Receptions = () => {
     const [notFound, setNotFound] = useState(false);
     const [searching, setSearching] = useState(false);
     const [user, setUser] = useContext(UserContext);
-    const getClients = async () => {
+
+    const getAllReceptions = async () => {
         try {
             setLoading(true);
-            const result = await getClientes(25, 25 * page);
+            const result = await getReceptions(25, 25 * page);
             //console.log(result.reverse().slice(0,5));
             setData(result.reverse().slice(0,49));
             setTotal(Math.ceil(result.length / 25));
@@ -33,7 +33,7 @@ const Receptions = () => {
     }
     useEffect(() => {
         if (!searching) {
-            getClients();
+            getAllReceptions();
         }
         const user = JSON.parse(localStorage.getItem('user'))
         if(user){
@@ -41,7 +41,7 @@ const Receptions = () => {
         }
     }, [page]);
     /*useEffect(() => {
-        getClients();
+        getAllReceptions();
     }, [page]);
 
     const lastPage = () => {
@@ -56,7 +56,7 @@ const Receptions = () => {
 
     const onSearch = async (param) => {
         if (!param) {
-            return getClients();
+            return getAllReceptions();
         }
         setLoading(true);
         setNotFound(false);
@@ -100,7 +100,7 @@ const Receptions = () => {
                     </div>
                 </section>
             ) : (
-                <RecepcionesCard
+                <CardReception
                     loading={loading}
                     data={data}
                 />

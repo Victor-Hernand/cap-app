@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "../../components/Loading";
 
-const RecepcionesCard = (props) => {
+const CardReception = (props) => {
     const { data, loading } = props;
 
     return (
@@ -40,4 +40,4 @@ const RecepcionesCard = (props) => {
     );
 }
 
-export default RecepcionesCard;
+export default CardReception;

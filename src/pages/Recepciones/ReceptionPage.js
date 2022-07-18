@@ -5,7 +5,7 @@ import ModelDropdown from "../../components/ModelDropdown";
 import CarPlateSearch from "../../components/CarPlateSearch";
 import ClientDropdown from "../../components/ClientDropdown";
 import MechanicDropdown from "../../components/MechanicDropdown";
-import { postReception } from "../../services/recepcionesService";
+import { postReception } from "../../services/ReceptionService";
 const ReceptionPage = () => {
     const submitReceptionForm = async() => {
         const form = document.getElementById("reception-form");

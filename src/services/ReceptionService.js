@@ -1,7 +1,7 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 const header = process.env.REACT_APP_HEADER;
 
-export const getClientes = async (limit = 25, offset = 0) => {
+export const getReceptions = async (limit = 25, offset = 0) => {
     try {
         let url = `${baseUrl}/receptions`
         const response = await fetch(url);
