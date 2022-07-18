@@ -6,7 +6,7 @@ export const AuthMiddleware = ({children}) => {
     let isAuthenticated = user ? true : false;
     if(!isAuthenticated){
         const _user = JSON.parse(localStorage.getItem("user"))
-        isAuthenticated = _user ? true : false;
+        isAuthenticated = _user?.id ? true : false;
     }
     if(!isAuthenticated) {
         return <Navigate to="/login" />
