@@ -6,7 +6,23 @@ import CarPlateSearch from "../../components/CarPlateSearch";
 import ClientDropdown from "../../components/ClientDropdown";
 import MechanicDropdown from "../../components/MechanicDropdown";
 import { postReception } from "../../services/ReceptionService";
+import CategoriesCard from "../../components/CategoriesCard";
+import { getCategories } from "../../services/CategoriesService";
 const ReceptionPage = () => {
+    const [categories, setCategories] = useState();
+
+    const getAllCategories = async () => {
+        try {
+            const result = await getCategories();
+            setCategories(result);
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        getAllCategories();
+    }, []);
     const submitReceptionForm = async () => {
         const form = document.getElementById("reception-form");
         const formData = new FormData(form);
@@ -48,6 +64,7 @@ const ReceptionPage = () => {
                             <label className="sr-only" htmlFor="date">Fecha</label>
                             <input type="date" id="date" name="date" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Traccion" required />
                         </div>
+                        <CategoriesCard categories={categories} />
                         <div className="pr-2 float-right my-4 ">
                             <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                 Guardar
