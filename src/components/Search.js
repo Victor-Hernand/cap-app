@@ -10,7 +10,7 @@ const Search = (props) => {
             onSearch(null);
         }
         if (e.target.value.length >= 2){
-            onSearch(search);
+            onSearch(e.target.value);
         }
     };
 

@@ -13,10 +13,10 @@ const CategoriesCard = (props) => {
                             <div className="px-6 py-2">
                                 <div className="mb-2">
                                     <p className="font-semibold">{item.name}</p>
-                                    {/*<span>{document.getElementById("comment" + idx)?.value}</span>*/}
+                                    {/*<span>{document.getElementById("notes" + idx)?.value}</span>*/}
                                 </div>
                                 <div>
-                                    <textarea name={"comment" + idx} id={"comment" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
+                                    <textarea name={"notes" + idx} id={"notes" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
                                 </div>
                             </div>
                             <div className="px-6 pt-2 pb-2">
@@ -45,10 +45,10 @@ const CategoriesCard = (props) => {
                             <div className="px-6 py-2">
                                 <div className="mb-2">
                                     <p className="font-semibold">{item.name}</p>
-                                    {/*<span>{document.getElementById("comment" + idx)?.value}</span>*/}
+                                    {/*<span>{document.getElementById("notes" + idx)?.value}</span>*/}
                                 </div>
                                 <div>
-                                    <textarea name={"comment_pf" + idx} id={"comment_pf" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
+                                    <textarea name={"notes_pf" + idx} id={"notes_pf" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
                                 </div>
                             </div>
                             <div className="px-6 pt-2 pb-2">
@@ -79,7 +79,7 @@ const CategoriesCard = (props) => {
                                     <p className="font-semibold">{item.name}</p>
                                 </div>
                                 <div>
-                                    <textarea name={"comment_pt" + idx} id={"comment_pt" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
+                                    <textarea name={"notes_pt" + idx} id={"notes_pt" + idx} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="Comentar..." required="" />
                                 </div>
                             </div>
                             <div className="px-6 pt-2 pb-2">
