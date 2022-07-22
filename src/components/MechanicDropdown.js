@@ -2,12 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { ReceptionContext } from "../context/Reception";
 import { getMechanics } from "../services/MechanicService";
 const MechanicDropdown = (props) => {
-    const [mechanics, setMechanics] = useContext(ReceptionContext);
+    const {mechanics, setMechanics} = useContext(ReceptionContext);
     const [items, setItems] = useState([]);
     
     const searchMechanic = (event) => {
         const search = event.target.value
         if(!search){ return setItems([]) }
+         console.log(mechanics)
         const result = mechanics.filter((item, index) => item.first_name.toLowerCase().indexOf(search.toLowerCase()) >= 0 || item.last_name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
         setItems(result)
     }

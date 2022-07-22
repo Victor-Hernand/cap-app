@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { ReceptionContext } from "../context/Reception";
 import { getBrands } from "../services/BrandService";
 const BrandDropdown = (props) => {
-    const [brands, setBrands] = useContext(ReceptionContext);
+    const {brands, setBrands} = useContext(ReceptionContext);
     const [items, setItems] = useState([]);
     
     const searchBrand = (event) => {
@@ -36,7 +36,7 @@ const BrandDropdown = (props) => {
                 <input onChange={searchBrand} type="text" id="brand-search" 
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" 
                     placeholder="Buscar marca" required autoComplete="off" />
-                <input type="hidden" id="brand_id" />
+                <input type="hidden" id="brand_id" name="brand_id"/>
             </div>
             <ul className="flex flex-col w-full shadow-md">
             {items.map(brand => {

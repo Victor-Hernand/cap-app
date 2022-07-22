@@ -3,7 +3,7 @@ import { ReceptionContext } from "../context/Reception";
 
 const ModelDropdown = (props) => {
 
-    const [brands, setBrands] = useContext(ReceptionContext);
+    const {brands, setBrands} = useContext(ReceptionContext);
     const [items, setItems] = useState([]);
     
     const searchModel = (event) => {
@@ -30,7 +30,7 @@ const ModelDropdown = (props) => {
                 <input onChange={searchModel} type="text" id="model-search" 
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" 
                     placeholder="Buscar modelo" required autoComplete="off" />
-                <input type="hidden" id="model_id" />
+                <input type="hidden" id="model_id" name="model_id" />
             </div>
             <ul className="flex flex-col w-full shadow-md">
             {items.map(model => {

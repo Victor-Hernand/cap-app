@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { ReceptionContext } from "../context/Reception";
 import { getClients } from "../services/ClientService";
 const ClientDropdown = (props) => {
-    const [clients, setClients] = useContext(ReceptionContext);
+    const {clients, setClients} = useContext(ReceptionContext);
     const [items, setItems] = useState([]);
     
     const searchClient = (event) => {
@@ -36,7 +36,7 @@ const ClientDropdown = (props) => {
                 <input onChange={searchClient} type="text" id="client-search" 
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" 
                     placeholder="Buscar cliente" required autoComplete="off" />
-                <input type="hidden" id="client_id" />
+                <input type="hidden" id="client_id" name="client_id" />
             </div>
             <ul className="flex flex-col w-full shadow-md">
             {items.map(client => {
