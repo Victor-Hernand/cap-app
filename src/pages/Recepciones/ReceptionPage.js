@@ -13,7 +13,7 @@ import Resizer from "react-image-file-resizer";
 const ReceptionPage = () => {
     const [categories, setCategories] = useState();
     const [img, setImg] = useState(null);
-    const [newImg, setNewImg] = useState(null);
+    const [pictures, setPictures] = useState(null);
 
     const getAllCategories = async () => {
         try {
@@ -30,14 +30,12 @@ const ReceptionPage = () => {
         e.preventDefault();
         const form = document.getElementById("reception-form");
         const formData = new FormData(form);
-        console.log(newImg);
+        console.log(pictures);
         formData.delete("files");
-        for (let i = 0; i < newImg.length; i++) {
-            formData.append("files",newImg[i]);
+	let filesData = []
+        for (let i = 0; i < pictures.length; i++) {
+            formData.append(`files[${i}]`, pictures[i]);
         }   
-        for (const item of formData.entries()) {
-            console.log(item)
-        }
         const response = await postReception(formData);
         console.log(response);
 
@@ -47,7 +45,7 @@ const ReceptionPage = () => {
     const onFileResize = (event) => {
         var fileInput = false;
         let files = event.target.files;
-        let imagenes = [];
+        let images = [];
     if (files) {
         fileInput = true;
     }
@@ -56,15 +54,14 @@ const ReceptionPage = () => {
             try {
                 Resizer.imageFileResizer(
                     files[i],
-                    300,
-                    300,
+                    1024,
+                    720,
                     "JPEG",
                     100,
                     0,
                     (uri) => {
-                        imagenes.push(uri);
-                        console.log(imagenes)
-                        setNewImg(imagenes);
+                        images.push(uri);
+                        setPictures(images);
                     },
                     "file",
                     200,

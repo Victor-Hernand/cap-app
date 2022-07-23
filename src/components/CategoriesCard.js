@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 const CategoriesCard = (props) => {
     const { categories } = props;
+    console.log(categories)
     const categoryArray = Object.entries(categories ?? [])
     return (
         <>
-            <div className="pl-3 my-2 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 bg-slate-50">
+            <div className="pl-3 my-2 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 bg-slate-50">
                 {categoryArray.map((items, idx) => {
                     return (
                     <div key={idx}>
                         <h4 className="font-semibold pl-3 my-8 text-indigo-600">{items[0]}</h4>
                         {items[1].map((item, index) => { return (
-                            <div key={item.id} className="bg-white max-w-sm rounded overflow-hidden shadow-lg my-2 mr-2">
+                            <div key={item.id} className={index > 2 ? 'hidden' : 'bg-white max-w-sm rounded overflow-hidden shadow-lg my-2 mr-2'} >
                             
                             <div className="px-6 py-2">
                                 <div className="mb-2">
