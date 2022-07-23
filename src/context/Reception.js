@@ -8,6 +8,7 @@ export const ReceptionProvider = (props) => {
     const [mechanics, setMechanics] = useState([])
     const [brands, setBrands] = useState([])
     const [models, setModels] = useState([])
+    const [receptions, setReceptions] = useState([])
 
      const providerValue = useMemo(() => ({
         clients, setClients,
@@ -15,7 +16,8 @@ export const ReceptionProvider = (props) => {
         brands, setBrands,
         models, setModels,
         types, setTypes,
-     }), [clients, mechanics, brands, models, types]);
+        receptions, setReceptions
+     }), [clients, mechanics, brands, models, types, receptions]);
     return (
         <ReceptionContext.Provider value={providerValue}>
             {props.children}

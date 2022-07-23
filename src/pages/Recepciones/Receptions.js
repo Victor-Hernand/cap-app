@@ -8,6 +8,7 @@ import { getReceptions, searchReception } from "../../services/ReceptionService"
 import { useContext } from "react";
 import { UserContext } from "../../context/User";
 import CardReception from "./CardReceptions";
+import { ReceptionContext } from "../../context/Reception";
 
 const Receptions = () => {
     const [page, setPage] = useState(0);
@@ -17,13 +18,14 @@ const Receptions = () => {
     const [notFound, setNotFound] = useState(false);
     const [searching, setSearching] = useState(false);
     const [user, setUser] = useContext(UserContext);
+    const {receptions, setReceptions} = useContext(ReceptionContext);
 
     const getAllReceptions = async () => {
         try {
             setLoading(true);
             const result = await getReceptions(25, 25 * page);
-            //console.log(result.reverse().slice(0,5));
             setData(result.reverse().slice(0,49));
+            setReceptions(result.reverse().slice(0,49));
             setTotal(Math.ceil(result.length / 25));
             setLoading(false);
             setNotFound(false);

@@ -41,12 +41,12 @@ const CategoriesCard = (props) => {
                     );
                 }) }
             </div>
-            <div className="flex flex-col items-center p-2">
-                <label className="sr-only" htmlFor="car_motor">Observaciones del Cliente</label>
+            <div className="flex flex-col p-2">
+                <label className="block mb-2 text-sm font-medium text-indigo-600" htmlFor="car_motor">Observaciones del Cliente</label>
                 <textarea rows="3" name="private_notes" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="" required="" />
             </div>
-            <div className="flex flex-col items-center p-2">
-                <label className="sr-only" htmlFor="private_notes">Trabajos a realizar</label>
+            <div className="flex flex-col p-2">
+                <label className="block mb-2 text-sm font-medium text-indigo-600" htmlFor="private_notes">Trabajos a realizar</label>
                 <textarea rows="3" name="public_notes" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full p-2.5" placeholder="" required="" />
             </div>
         </>

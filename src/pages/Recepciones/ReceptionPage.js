@@ -10,11 +10,11 @@ import CategoriesCard from "../../components/CategoriesCard";
 import { getCategories } from "../../services/CategoriesService";
 import { postReception } from "../../services/ReceptionService";
 import Resizer from "react-image-file-resizer";
+import { useNavigate } from "react-router-dom";
 const ReceptionPage = () => {
     const [categories, setCategories] = useState();
-    const [img, setImg] = useState(null);
     const [pictures, setPictures] = useState(null);
-
+    const navigate = useNavigate();
     const getAllCategories = async () => {
         try {
             const result = await getCategories();
@@ -38,6 +38,9 @@ const ReceptionPage = () => {
         }   
         const response = await postReception(formData);
         console.log(response);
+        if(response){
+            return navigate('/');
+        }
 
     }
 
