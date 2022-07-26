@@ -27,9 +27,11 @@ const NavBar = () => {
                             <Link className="text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/">
                                 Recepciones
                             </Link>
+                            {/* 
                             <Link className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/diagnosticos">
                                 Diagnóstico
                             </Link>
+                            */}
                             <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
                                 Cerrar Sesion
                             </button>
@@ -52,12 +54,14 @@ const NavBar = () => {
         </div>
         <div className={hidde ? "md:hidden" : "hidden"}>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/recepciones">
+                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/">
                     Recepciones
                 </Link>
+                {/* 
                 <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/diagnosticos">
                     Diagnóstico
                 </Link>
+                */}
                 <hr className="text-current" />
                 <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
                     Cerrar Sesion

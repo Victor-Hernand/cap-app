@@ -13,7 +13,7 @@ import Resizer from "react-image-file-resizer";
 import { useNavigate } from "react-router-dom";
 const ReceptionPage = () => {
     const [categories, setCategories] = useState();
-    const [pictures, setPictures] = useState(null);
+    const [pictures, setPictures] = useState([]);
     const navigate = useNavigate();
     const getAllCategories = async () => {
         try {
@@ -30,7 +30,6 @@ const ReceptionPage = () => {
         e.preventDefault();
         const form = document.getElementById("reception-form");
         const formData = new FormData(form);
-        console.log(pictures);
         formData.delete("files");
 	let filesData = []
         for (let i = 0; i < pictures.length; i++) {
