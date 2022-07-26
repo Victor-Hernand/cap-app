@@ -8,7 +8,7 @@ const BrandDropdown = (props) => {
     const searchBrand = (event) => {
         const search = event.target.value
         if(!search){ return setItems([]) }
-        const result = brands.filter((item, index) => item.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 && index < 10)
+        const result = brands.filter((item, index) => item.name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
         setItems(result)
     }
     const selectBrand = (brand) => { 

@@ -24,6 +24,7 @@ const Receptions = () => {
         try {
             setLoading(true);
             const result = await getReceptions(25, 25 * page);
+            console.log(result)
             setData(result.reverse().slice(0,49));
             setReceptions(result.reverse().slice(0,49));
             setTotal(Math.ceil(result.length / 25));
@@ -42,19 +43,7 @@ const Receptions = () => {
             setUser(user);
         }
     }, [page]);
-    /*useEffect(() => {
-        getAllReceptions();
-    }, [page]);
-
-    const lastPage = () => {
-        const nextPage = Math.max(page - 1, 0);
-        setPage(nextPage);
-    };
-
-    const nextPage = () => {
-        const nextPage = Math.min(page + 1, total - 1);
-        setPage(nextPage);
-    }; */
+    
 
     const onSearch = async (param) => {
         if (!param) {
@@ -70,8 +59,7 @@ const Receptions = () => {
             return;
         } else {
             setData(result.reverse().slice(0,49));
-            //setPage(0);
-            //setTotal(1);
+            
         }
         setLoading(false);
         setSearching(false);

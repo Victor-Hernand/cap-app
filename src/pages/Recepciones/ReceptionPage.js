@@ -83,8 +83,8 @@ const ReceptionPage = () => {
             <div className="mt-4 grid grid-cols-1 md:grid-cols-1 sm:grid-cols-1 ">
                 <div className="px-4 pb-6 sm:px-10">
                     <form method="POST" id="reception-form" onSubmit={(e) => submitReceptionForm(e)}>
-                        <ClientDropdown />
                         <CarPlateSearch />
+                        <ClientDropdown />
                         <MechanicDropdown />
                         <BrandDropdown />
                         <ModelDropdown />

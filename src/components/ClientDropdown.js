@@ -8,7 +8,7 @@ const ClientDropdown = (props) => {
     const searchClient = (event) => {
         const search = event.target.value
         if(!search){ return setItems([]) }
-        const result = clients.filter((item, index) => item.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 && index < 10)
+        const result = clients.filter((item, index) => item.name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
         setItems(result)
     }
     const selectClient = (client) => { 
