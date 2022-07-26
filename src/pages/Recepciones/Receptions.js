@@ -70,7 +70,7 @@ const Receptions = () => {
             <div className="grid grid-cols-1 p-4 solid text-2xl text-gray-500">
                 <h1>Recepciones de vehículos</h1>
             </div>
-            <div className="pl-3 mb-4">
+            <div className="px-3 mb-4">
                 <Link to="/receptions/edit" className="py-2 px-4 flex justify-center items-center bg-blue-500 hover:bg-blue-600 text-white w-18 transition ease-in duration-200 text-center text-base font-semibold rounded-md ">
                     Recepción de vehículo
                     <svg width="20" height="20" fill="currentColor" className="ml-2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
