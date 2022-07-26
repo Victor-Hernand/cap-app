@@ -8,6 +8,7 @@ import { UserProvider } from './context/User';
 import { ReceptionProvider } from './context/Reception';
 import { AuthMiddleware } from './components/AuthMiddleware';
 import Receptions from './pages/Recepciones/Receptions';
+import ShowReception from './pages/Recepciones/ShowReception';
 const App = () => {
   
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/" element={<AuthMiddleware><Receptions /></AuthMiddleware>}/>
           <Route path="/receptions/edit" element={<AuthMiddleware><ReceptionPage /></AuthMiddleware>}/>
+          <Route path="/receptions/show/:id" element={<AuthMiddleware><ShowReception /></AuthMiddleware>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
         </ReceptionProvider>

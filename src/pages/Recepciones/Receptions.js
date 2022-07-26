@@ -8,6 +8,7 @@ import { getReceptions, searchReception } from "../../services/ReceptionService"
 import { useContext } from "react";
 import { UserContext } from "../../context/User";
 import CardReception from "./CardReceptions";
+import { ReceptionContext } from "../../context/Reception";
 
 const Receptions = () => {
     const [page, setPage] = useState(0);
@@ -17,13 +18,15 @@ const Receptions = () => {
     const [notFound, setNotFound] = useState(false);
     const [searching, setSearching] = useState(false);
     const [user, setUser] = useContext(UserContext);
+    const {receptions, setReceptions} = useContext(ReceptionContext);
 
     const getAllReceptions = async () => {
         try {
             setLoading(true);
             const result = await getReceptions(25, 25 * page);
-            //console.log(result.reverse().slice(0,5));
+            console.log(result)
             setData(result.reverse().slice(0,49));
+            setReceptions(result.reverse().slice(0,49));
             setTotal(Math.ceil(result.length / 25));
             setLoading(false);
             setNotFound(false);
@@ -40,19 +43,7 @@ const Receptions = () => {
             setUser(user);
         }
     }, [page]);
-    /*useEffect(() => {
-        getAllReceptions();
-    }, [page]);
-
-    const lastPage = () => {
-        const nextPage = Math.max(page - 1, 0);
-        setPage(nextPage);
-    };
-
-    const nextPage = () => {
-        const nextPage = Math.min(page + 1, total - 1);
-        setPage(nextPage);
-    }; */
+    
 
     const onSearch = async (param) => {
         if (!param) {
@@ -68,8 +59,7 @@ const Receptions = () => {
             return;
         } else {
             setData(result.reverse().slice(0,49));
-            //setPage(0);
-            //setTotal(1);
+            
         }
         setLoading(false);
         setSearching(false);

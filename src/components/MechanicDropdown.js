@@ -2,12 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { ReceptionContext } from "../context/Reception";
 import { getMechanics } from "../services/MechanicService";
 const MechanicDropdown = (props) => {
-    const [mechanics, setMechanics] = useContext(ReceptionContext);
+    const {mechanics, setMechanics} = useContext(ReceptionContext);
     const [items, setItems] = useState([]);
     
     const searchMechanic = (event) => {
         const search = event.target.value
         if(!search){ return setItems([]) }
+         console.log(mechanics)
         const result = mechanics.filter((item, index) => item.first_name.toLowerCase().indexOf(search.toLowerCase()) >= 0 || item.last_name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
         setItems(result)
     }
@@ -34,7 +35,7 @@ const MechanicDropdown = (props) => {
                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                 </div>
                 <input onChange={searchMechanic} type="text" id="mechanic-search" 
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5 " 
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" 
                     placeholder="Buscar tecnico" required autoComplete="off" />
                 <input type="hidden" id="mechanic_id" />
             </div>
