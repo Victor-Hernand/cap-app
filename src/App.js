@@ -9,6 +9,7 @@ import { ReceptionProvider } from './context/Reception';
 import { AuthMiddleware } from './components/AuthMiddleware';
 import Receptions from './pages/Recepciones/Receptions';
 import ShowReception from './pages/Recepciones/ShowReception';
+import ReceptionPdf from './pages/Recepciones/ReceptionPdf';
 const App = () => {
   
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/" element={<AuthMiddleware><Receptions /></AuthMiddleware>}/>
           <Route path="/receptions/edit" element={<AuthMiddleware><ReceptionPage /></AuthMiddleware>}/>
           <Route path="/receptions/show/:id" element={<AuthMiddleware><ShowReception /></AuthMiddleware>}/>
+          <Route path="/receptions/pdf/:id" element={<AuthMiddleware><ReceptionPdf /></AuthMiddleware>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
         </ReceptionProvider>

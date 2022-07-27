@@ -39,10 +39,10 @@ const ShowReception = () => {
                             <p><span className="font-semibold">Mecanico:</span> {data.mechanic_id ?? ''}</p>
                         </li>
                         <li>
-                            <p><span className="font-semibold">Placa:</span> {data.car_brand ?? ''}</p>
+                            <p><span className="font-semibold">Marca:</span> {data.car_brand ?? ''}</p>
                         </li>
                         <li>
-                            <p><span className="font-semibold">Placa:</span> {data.car_model ?? ''}</p>
+                            <p><span className="font-semibold">Modelo:</span> {data.car_model ?? ''}</p>
                         </li>
                     </ul>
                 </div>
