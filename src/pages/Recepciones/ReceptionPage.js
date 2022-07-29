@@ -5,7 +5,7 @@ import ModelDropdown from "../../components/ModelDropdown";
 import CarPlateSearch from "../../components/CarPlateSearch";
 import ClientDropdown from "../../components/ClientDropdown";
 import MechanicDropdown from "../../components/MechanicDropdown";
-
+import Loading from "../../components/Loading";
 import CategoriesCard from "../../components/CategoriesCard";
 import { getCategories } from "../../services/CategoriesService";
 import { postReception } from "../../services/ReceptionService";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 const ReceptionPage = () => {
     const [categories, setCategories] = useState();
     const [pictures, setPictures] = useState([]);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const getAllCategories = async () => {
         try {
@@ -28,15 +29,16 @@ const ReceptionPage = () => {
     }, []);
     const submitReceptionForm = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const form = document.getElementById("reception-form");
         const formData = new FormData(form);
         formData.delete("files");
-	let filesData = []
+	    let filesData = []
         for (let i = 0; i < pictures.length; i++) {
             formData.append(`files[${i}]`, pictures[i]);
         }   
         const response = await postReception(formData);
-        console.log(response);
+        setLoading(false)
         if(response){
             return navigate('/');
         }
@@ -78,6 +80,10 @@ const ReceptionPage = () => {
 
     return (
         <BasicLayout>
+            {loading ? (
+                <Loading />
+            ) : (
+             <>
             <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Formulario de recepcion</h2>
             <div className="mt-4 grid grid-cols-1 md:grid-cols-1 sm:grid-cols-1 ">
                 <div className="px-4 pb-6 sm:px-10">
@@ -113,7 +119,7 @@ const ReceptionPage = () => {
                         <div className="p-2 flex">
                             <div className="mb-3 w-96">
                                 <label htmlFor="formFileMultiple" className="form-label inline-block mb-2 font-semibold text-indigo-600">Agregar Imagenes</label>
-                                <input onChange={onFileResize} name="files" accept="image/jpeg" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileMultiple" multiple />
+                                <input onChange={onFileResize} name="files" accept="image/jpeg,image/png" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileMultiple" multiple />
                             </div>
                         </div>
                         <div className="pr-2 float-right my-4 ">
@@ -125,6 +131,8 @@ const ReceptionPage = () => {
                     </form>
                 </div>
             </div>
+            </>
+            )}
         </BasicLayout>
 
     )

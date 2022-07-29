@@ -24,12 +24,12 @@ const CategoriesCard = (props) => {
 
                                 <div className="flex flex-wrap">
                                     <div className="flex items-center mr-4">
-                                        <input value="1" type="radio" name={"types[" + item.id + "][is_good]"} className="w-4 h-4" />
-                                        <label className="ml-2 text-sm py-2 font-medium text-green-600">Bueno</label>
+                                        <input id={"reception_type_good_" + item.id } value="1" type="radio" name={"types[" + item.id + "][is_good]"} className="w-4 h-4" />
+                                        <label htmlFor={"reception_type_good_" + item.id } className="ml-2 text-sm py-2 font-medium text-green-600">Bueno</label>
                                     </div>
                                     <div className="flex items-center mr-4">
-                                        <input value="0" type="radio" name={"types[" + item.id + "][is_good]"} className="w-4 h-4" />
-                                        <label className="ml-2 text-sm py-2 font-medium text-red-600">Malo</label>
+                                        <input id={"reception_type_bad_" + item.id } value="0" type="radio" name={"types[" + item.id + "][is_good]"} className="w-4 h-4" />
+                                        <label htmlFor={"reception_type_bad_" + item.id } className="ml-2 text-sm py-2 font-medium text-red-600">Malo</label>
                                     </div>
                                 </div>
                             </div>
