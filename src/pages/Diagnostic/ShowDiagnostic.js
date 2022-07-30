@@ -66,7 +66,12 @@ const ShowDiagnostic = () => {
 
             <div className="w-full grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-4 md:mb-0 items-center p-8">
                 {categories ? categories.map((i, idx) => {
-
+                    let is_good;
+                    if (i.is_good == 1) {
+                        is_good = 'Bueno';
+                    } else {
+                        is_good = 'Malo';
+                    }
                     return (
                         <div key={idx} className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4">
                             <p className="font-bold text-gray-600 dark:text-white">
@@ -79,6 +84,9 @@ const ShowDiagnostic = () => {
                                 <div className="flex flex-col ml-2 justify-between">
                                     <span className="font-semibold text-indigo-500 text-xs">
                                         {i.category}
+                                    </span>
+                                    <span className="dark:text-gray-400 text-xs flex items-center">
+                                        Estado:  {is_good}
                                     </span>
                                 </div>
                             </div>
