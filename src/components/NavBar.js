@@ -27,11 +27,9 @@ const NavBar = () => {
                             <Link className="text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/">
                                 Recepciones
                             </Link>
-                            {/* 
-                            <Link className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/diagnosticos">
+                            <Link className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" to="/diagnostic">
                                 Diagnóstico
                             </Link>
-                            */}
                             <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
                                 Cerrar Sesion
                             </button>
@@ -57,11 +55,9 @@ const NavBar = () => {
                 <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/">
                     Recepciones
                 </Link>
-                {/* 
-                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/diagnosticos">
+                <Link className="text-white hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium" to="/diagnostic">
                     Diagnóstico
                 </Link>
-                */}
                 <hr className="text-current" />
                 <button className="text-white dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={postLogout}>
                     Cerrar Sesion

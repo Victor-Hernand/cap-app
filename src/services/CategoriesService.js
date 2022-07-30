@@ -12,3 +12,14 @@ export const getCategories = async () => {
     }
 
 }
+
+export const getExams = async () => {
+    try {
+        let url = `${baseUrl}/exam-types`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}

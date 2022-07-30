@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import BasicLayout from "../../components/BasicLayout";
-import { ReceptionContext } from "../../context/Reception";
+import { DiagnosticContext } from "../../context/Diagnostic";
 
-const ShowReception = () => {
-    const { receptions, setReceptions } = useContext(ReceptionContext);
+const ShowDiagnostic = () => {
+    const { diagnostic, setDiagnostic } = useContext(DiagnosticContext);
     const { id } = useParams();
-    const [data, setData] = useState(receptions ?? []);
+    const [data, setData] = useState(diagnostic ?? []);
     const [categories, setCategories] = useState([]);
 
     const getReception = () => {
-        receptions.map((i) => {
+        diagnostic.map((i) => {
             if (i.id == id) {
                 setData(i);
                 setCategories(i.items);
@@ -25,7 +25,7 @@ const ShowReception = () => {
 
     return (
         <BasicLayout>
-            <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Recepción</h2>
+            <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Diagnóstico</h2>
             <div className="mx-4 px-6 py-4 sm:px-10 bg-white mt-4 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 ">
                 <div className="">
                     <ul>
@@ -66,12 +66,7 @@ const ShowReception = () => {
 
             <div className="w-full grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-4 md:mb-0 items-center p-8">
                 {categories ? categories.map((i, idx) => {
-                    let is_good;
-                    if (i.is_good == 1) {
-                        is_good = 'Bueno';
-                    } else {
-                        is_good = 'Malo';
-                    }
+
                     return (
                         <div key={idx} className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4">
                             <p className="font-bold text-gray-600 dark:text-white">
@@ -85,16 +80,13 @@ const ShowReception = () => {
                                     <span className="font-semibold text-indigo-500 text-xs">
                                         {i.category}
                                     </span>
-                                    <span className="dark:text-gray-400 text-xs flex items-center">
-                                        Estado:  {is_good}
-                                    </span>
                                 </div>
                             </div>
                         </div>)
                 }) : null}
             </div>
 
-            <div className="mx-4 mb-4 shadow-lg rounded-xl p-4 sm:px-10 bg-white mt-2 grid grid-cols-1 md:grid-cols-1 sm:grid-cols-1 ">
+            <div className="mx-4 mb-4 shadow-lg rounded-xl p-4 sm:px-10 bg-white mt-2 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 ">
                 <div className="my-4">
                     <h3 className="font-semibold text-gray-500">Observaciones del cliente</h3>
                     <p>{data.private_notes}</p>
@@ -110,4 +102,4 @@ const ShowReception = () => {
 
 }
 
-export default ShowReception;
+export default ShowDiagnostic;
