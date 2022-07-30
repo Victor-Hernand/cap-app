@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ReceptionContext } from "../../context/Reception";
+import { DiagnosticContext } from "../../context/Diagnostic";
 import { useParams } from "react-router-dom";
 
-const ReceptionPdf = (props) => {
+const DiagnosticPdf = (props) => {
 
-    const { receptions, setReceptions } = useContext(ReceptionContext);
+    const { diagnostic, setDiagnostic } = useContext(DiagnosticContext);
     const { id } = useParams();
-    const [data, setData] = useState(receptions ?? []);
+    const [data, setData] = useState(diagnostic ?? []);
     const [categories, setCategories] = useState([]);
     const [account, setAccount] = useState([])
 
 
-    const getReception = async() => {
-        await receptions.map(async(i) => {
+    const getDiagnostic = async() => {
+        await diagnostic.map(async(i) => {
             if (i.id == id) {
                 await setData(i);
                 await setCategories(i.items);
@@ -32,7 +32,7 @@ const ReceptionPdf = (props) => {
     useEffect(() => {
         const loadData = async() => {
             await loadAccount();
-            await getReception();
+            await getDiagnostic();
         }
         loadData();
 
@@ -45,7 +45,7 @@ const ReceptionPdf = (props) => {
                     <img src={"https://cap.miposvirtual.com/logo/" +  account.logo}  className="w-32"/>
                 </div>
                 <div className="col-span-9 text-right">
-                    <h1 className="font-bold text-4xl">ORDEN DE RECEPCIÓN Y TRABAJO</h1> <br />
+                    <h1 className="font-bold text-4xl">DIAGNOSTICO DE VEHICULO</h1> <br />
                     <p>Fecha de emisión: {data.reception_date}</p>
                     <p>Técnico: {data.mechanic_id}</p>
                 </div>
@@ -183,4 +183,4 @@ const ReceptionPdf = (props) => {
     )
 }
 
-export default ReceptionPdf;
+export default DiagnosticPdf;

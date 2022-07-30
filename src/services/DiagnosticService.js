@@ -40,7 +40,7 @@ export const postDiagnostic = async (formData) => {
 	    const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }
-        const user = await localStorage.getItem('user')
+        const user = await JSON.parse(localStorage.getItem('user'))
         const accountId = user ? user.account_id : 3
         formData.append('account_id', accountId)
         const response = await fetch(url, {
@@ -55,4 +55,19 @@ export const postDiagnostic = async (formData) => {
         console.log(err);
     }
 
+}
+
+export const deleteDiagnostic = async(id) => {
+    try {
+        let url = `${baseUrl}/exams/${id}`
+        const user = await JSON.parse(localStorage.getItem('user'))
+        const response = await fetch(url, {
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
 }

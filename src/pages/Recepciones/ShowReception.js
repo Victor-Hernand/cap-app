@@ -2,22 +2,32 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import BasicLayout from "../../components/BasicLayout";
 import { ReceptionContext } from "../../context/Reception";
-
+import { deleteReception } from "../../services/ReceptionService";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const ShowReception = () => {
     const { receptions, setReceptions } = useContext(ReceptionContext);
     const { id } = useParams();
     const [data, setData] = useState(receptions ?? []);
     const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
 
     const getReception = () => {
         receptions.map((i) => {
             if (i.id == id) {
                 setData(i);
                 setCategories(i.items);
+                console.log(i)
             }
 
         })
     }
+
+    const handleDeleteClick = async(id) => {
+        await deleteReception(id);
+        navigate('/')
+    }
+
 
     useEffect(() => {
         getReception();
@@ -104,6 +114,16 @@ const ShowReception = () => {
                     <p>{data.public_notes}</p>
                 </div>
             </div>
+
+            <div className="flex flex-col items-center justify-between">
+               <div className="max-w-md flex items-center justify-between gap-4">
+                   <button className="bg-red-500 text-white px-8 py-2 rounded-md" onClick={() => handleDeleteClick(id)}>Eliminar</button>
+                    <button className="bg-indigo-700 text-white px-8 py-2 rounded-md">
+                        <Link to={`/receptions/pdf/${id}`}>Imprimir</Link>
+                    </button>
+
+                </div>
+            </div>    
 
         </BasicLayout>
     );

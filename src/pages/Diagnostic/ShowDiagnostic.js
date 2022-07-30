@@ -2,13 +2,16 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import BasicLayout from "../../components/BasicLayout";
 import { DiagnosticContext } from "../../context/Diagnostic";
+import { deleteDiagnostic } from "../../services/DiagnosticService";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ShowDiagnostic = () => {
     const { diagnostic, setDiagnostic } = useContext(DiagnosticContext);
     const { id } = useParams();
     const [data, setData] = useState(diagnostic ?? []);
     const [categories, setCategories] = useState([]);
-
+    const navigate = useNavigate();
     const getReception = () => {
         diagnostic.map((i) => {
             if (i.id == id) {
@@ -17,6 +20,12 @@ const ShowDiagnostic = () => {
             }
 
         })
+    }
+
+
+    const handleDeleteClick = async(id) => {
+        await deleteDiagnostic(id);
+        navigate('/')
     }
 
     useEffect(() => {
@@ -104,6 +113,16 @@ const ShowDiagnostic = () => {
                     <p>{data.public_notes}</p>
                 </div>
             </div>
+
+            <div className="flex flex-col items-center justify-between">
+               <div className="max-w-md flex items-center justify-between gap-4">
+                   <button className="bg-red-500 text-white px-8 py-2 rounded-md" onClick={() => handleDeleteClick(id)}>Eliminar</button>
+                    <button className="bg-indigo-700 text-white px-8 py-2 rounded-md">
+                        <Link to={`/diagnostic/pdf/${id}`}>Imprimir</Link>
+                    </button>
+
+                </div>
+            </div>    
 
         </BasicLayout>
     );

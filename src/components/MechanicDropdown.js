@@ -37,7 +37,7 @@ const MechanicDropdown = (props) => {
                 <input onChange={searchMechanic} type="text" id="mechanic-search" 
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" 
                     placeholder="Buscar tecnico" required autoComplete="off" />
-                <input type="hidden" id="mechanic_id" />
+                <input type="hidden" name="mechanic_id" id="mechanic_id" />
             </div>
             <ul className="flex flex-col w-full shadow-md">
             {items.map(mechanic => {
