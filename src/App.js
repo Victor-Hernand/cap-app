@@ -1,4 +1,5 @@
 import './App.css';
+import 'prevent-pull-refresh';
 import ReceptionPage from './pages/Recepciones/ReceptionPage';
 import LoginPage from './pages/Auth/LoginPage';
 import NotFound from './pages/NotFound';

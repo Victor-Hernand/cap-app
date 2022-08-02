@@ -114,7 +114,7 @@ const ShowDiagnostic = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col items-center justify-between">
+            <div className="flex flex-col items-center justify-between my-8">
                <div className="max-w-md flex items-center justify-between gap-4">
                    <button className="bg-red-500 text-white px-8 py-2 rounded-md" onClick={() => handleDeleteClick(id)}>Eliminar</button>
                     <button className="bg-indigo-700 text-white px-8 py-2 rounded-md">

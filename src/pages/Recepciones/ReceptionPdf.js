@@ -11,29 +11,19 @@ const ReceptionPdf = (props) => {
     const [account, setAccount] = useState([])
 
 
-    const getReception = async() => {
-        await receptions.map(async(i) => {
-            if (i.id == id) {
-                await setData(i);
-                await setCategories(i.items);
-                print();
-            }
-
-        })
-    }
-    const loadAccount = async() => {
-        const user = await JSON.parse(localStorage.getItem('user'))
-        await setAccount(user.account)
+    const loadData = async() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        setAccount(user.account)
+        const currentReception = receptions.find((item) => item.id == id)
+        setData(currentReception);
+        setCategories(currentReception.items);
+        setTimeout(() => print(), 500);
     }
     const print = () => {
         window.print();
     }
 
     useEffect(() => {
-        const loadData = async() => {
-            await loadAccount();
-            await getReception();
-        }
         loadData();
 
     }, []);
@@ -78,9 +68,9 @@ const ReceptionPdf = (props) => {
                 <table className="border-collapse border border-slate-400 text-left ...">
                     <thead>
                         <tr>
-                            <th className="border border-slate-900 ...">Descripción</th>
-                            <th className="border border-slate-900 ...">Estado</th>
-                            <th className="border border-slate-900 ...">Observaciones</th>
+                            <th className="border border-slate-900 ..." width="500">Descripcion</th>
+                            <th className="border border-slate-900 ..." width="100">Estado</th>
+                            <th className="border border-slate-900 ..." width="500">Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,9 +94,9 @@ const ReceptionPdf = (props) => {
                 <table className="border-collapse border border-slate-400 text-left ...">
                     <thead>
                         <tr>
-                            <th className="border border-slate-900 ...">Descripción</th>
-                            <th className="border border-slate-900 ...">Estado</th>
-                            <th className="border border-slate-900 ...">Observaciones</th>
+                            <th className="border border-slate-900 ..." width="500">Descripcion</th>
+                            <th className="border border-slate-900 ..." width="100">Estado</th>
+                            <th className="border border-slate-900 ..." width="500">Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,9 +120,9 @@ const ReceptionPdf = (props) => {
                 <table className="border-collapse border border-slate-400 text-left ...">
                     <thead>
                         <tr>
-                            <th className="border border-slate-900 ...">Descripción</th>
-                            <th className="border border-slate-900 ...">Estado</th>
-                            <th className="border border-slate-900 ...">Observaciones</th>
+                            <th className="border border-slate-900 ..." width="500">Descripcion</th>
+                            <th className="border border-slate-900 ..." width="100">Estado</th>
+                            <th className="border border-slate-900 ..." width="500">Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,7 +142,7 @@ const ReceptionPdf = (props) => {
             </div>
 
             <div className="pt-4 pb-2 grid grid-cols-1">
-                <h3 className="font-bold">Observaciones del cliente: </h3>
+                <h3 className="font-bold" width="500">Observaciones del cliente: </h3>
                 <span>{data.public_notes}</span>
             </div>
 
