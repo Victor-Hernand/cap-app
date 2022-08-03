@@ -11,10 +11,15 @@ import { getExams } from "../../services/CategoriesService";
 import Resizer from "react-image-file-resizer";
 import { useNavigate } from "react-router-dom";
 import { postDiagnostic } from "../../services/DiagnosticService";
+import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
+import ImagePreview from "../ImagePreview";
+import "react-html5-camera-photo/build/css/index.css";
 
 const DiagnosticPage = () => {
     const [categories, setCategories] = useState();
     const [pictures, setPictures] = useState([]);
+    const [dataUri, setDataUri] = useState("");
+    const [cameraOn, setCameraOn] = useState(false);
     const navigate = useNavigate();
     const getExamsTypes = async () => {
         try {
@@ -33,49 +38,59 @@ const DiagnosticPage = () => {
         const form = document.getElementById("reception-form");
         const formData = new FormData(form);
         formData.delete("files");
-	let filesData = []
+        let filesData = []
         for (let i = 0; i < pictures.length; i++) {
             formData.append(`files[${i}]`, pictures[i]);
-        }   
+        }
         const response = await postDiagnostic(formData);
         console.log(response);
-        if(response){
+        if (response) {
             return navigate('/');
         }
 
     }
 
 
+    function handleTakePhotoAnimationDone(dataUri) {
+        //console.log("takePhoto", dataUri);
+        setDataUri(dataUri);
+        setCameraOn(!cameraOn)
+    }
+    const cam = (e) => {
+        e.preventDefault();
+        setCameraOn(!cameraOn)
+    }
+    const isFullscreen = false;
     const onFileResize = (event) => {
         var fileInput = false;
         let files = event.target.files;
         let images = [];
-    if (files) {
-        fileInput = true;
-    }
-    if (fileInput) {
-        for (let i = 0; i < files.length; i++) {
-            try {
-                Resizer.imageFileResizer(
-                    files[i],
-                    1024,
-                    720,
-                    "JPEG",
-                    100,
-                    0,
-                    (uri) => {
-                        images.push(uri);
-                        setPictures(images);
-                    },
-                    "file",
-                    200,
-                    200
-                );
-            } catch (err) {
-                console.log(err);
+        if (files) {
+            fileInput = true;
+        }
+        if (fileInput) {
+            for (let i = 0; i < files.length; i++) {
+                try {
+                    Resizer.imageFileResizer(
+                        files[i],
+                        1024,
+                        720,
+                        "JPEG",
+                        100,
+                        0,
+                        (uri) => {
+                            images.push(uri);
+                            setPictures(images);
+                        },
+                        "file",
+                        200,
+                        200
+                    );
+                } catch (err) {
+                    console.log(err);
+                }
             }
         }
-    }
     }
 
     return (
@@ -114,6 +129,23 @@ const DiagnosticPage = () => {
                                 <input onChange={onFileResize} name="files" accept="image/jpeg" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileMultiple" multiple />
                             </div>
                         </div>
+                        {!dataUri ?
+                            (<div className="p-2 flex">
+                                <button onClick={(e) => cam(e)} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                    {!cameraOn ? 'Tomar foto' : 'Apagar camara'}
+                                </button>
+                            </div>) : null
+                        }
+                        {dataUri ? (
+                            <ImagePreview dataUri={dataUri} isFullscreen={isFullscreen} />
+                        ) : null}
+                        {(cameraOn ?
+                            <Camera
+                                onTakePhotoAnimationDone={handleTakePhotoAnimationDone}
+                                isFullscreen={isFullscreen}
+                                imageType={IMAGE_TYPES.JPG}
+                            />
+                            : null)}
                         <div className="pr-2 float-right my-4 ">
                             <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                 Guardar

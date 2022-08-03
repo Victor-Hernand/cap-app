@@ -16,7 +16,7 @@ import { DiagnosticProvider } from './context/Diagnostic';
 import DiagnosticPage from './pages/Diagnostic/DiagnosticPage';
 import ShowDiagnostic from './pages/Diagnostic/ShowDiagnostic';
 import DiagnosticPdf from './pages/Diagnostic/DiagnosticPdf';
-import TakePhoto from './components/TakePhoto';
+
 const App = () => {
   
   return (
@@ -34,7 +34,6 @@ const App = () => {
           <Route path="/diagnostic/edit" element={<AuthMiddleware><DiagnosticPage /></AuthMiddleware>}/>
           <Route path="/diagnostic/show/:id" element={<AuthMiddleware><ShowDiagnostic /></AuthMiddleware>}/>
           <Route path="/diagnostic/pdf/:id" element={<AuthMiddleware><DiagnosticPdf /></AuthMiddleware>}/>
-          <Route path="/diagnostic/photo" element={<AuthMiddleware><TakePhoto /></AuthMiddleware>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
         </DiagnosticProvider>
