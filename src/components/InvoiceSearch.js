@@ -4,8 +4,9 @@ import { getClients } from "../services/ClientService";
 import { getInvoices } from "../services/DiagnosticService";
 
 const InvoiceSearch = (props) => {
-    const {invoice, setInvoice, invoiceSelected, setInvoiceSelected} = useContext(DiagnosticContext);
+    const {invoice, setInvoice, invoiceSelected, setInvoiceSelected, clientName, setClientName} = useContext(DiagnosticContext);
     const [items, setItems] = useState([]);
+    const [dataClient, setDataClient] = useState([]);
     
     const searchInvoice = (event) => {
         const search = event.target.value
@@ -15,6 +16,12 @@ const InvoiceSearch = (props) => {
     }
     const selectDocument = (item) => { 
         setInvoiceSelected(item);
+        dataClient.map((i) => {
+            if (i.id == item.client_id) {
+                setClientName(i.name);
+            }
+
+        })
         document.getElementById('invoice-search').value = item.invoice_number;
         document.getElementById('invoice_id').value = item.id;
         setItems([])
@@ -24,8 +31,15 @@ const InvoiceSearch = (props) => {
         setInvoice(data);
         localStorage.setItem('invoice', JSON.stringify(data));
     }
+
+    const getClient = async () => {
+        const data = await getClients();
+        setDataClient(data);
+    }
+    
     useEffect(() => {
         fetchData();
+        getClient();
     }, []);
 
     return (

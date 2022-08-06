@@ -22,7 +22,7 @@ const DiagnosticPage = () => {
     const [pictures, setPictures] = useState([]);
     const [dataUri, setDataUri] = useState("");
     const [cameraOn, setCameraOn] = useState(false);
-    const { invoiceSelected, setInvoiceSelect } = useContext(DiagnosticContext);
+    const { invoiceSelected, setInvoiceSelect, clientName } = useContext(DiagnosticContext);
     const navigate = useNavigate();
     const getExamsTypes = async () => {
         try {
@@ -46,11 +46,14 @@ const DiagnosticPage = () => {
         for (let i = 0; i < pictures.length; i++) {
             formData.append(`files[${i}]`, pictures[i]);
         }
-        const response = await postDiagnostic(formData);
+        for (var entrie of formData.entries()) {
+            console.log(entrie[0]+ ': ' + entrie[1]); 
+    }
+        /*const response = await postDiagnostic(formData);
         console.log(response);
         if (response) {
             return navigate('/');
-        }
+        }*/
 
     }
 
@@ -109,6 +112,12 @@ const DiagnosticPage = () => {
                             <input autoComplete="false" readOnly type="text" id="car_plate" name="car_plate" value={invoiceSelected.car_plate ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Placa" />
                         </div>
                         <div className="flex flex-col items-center p-2">
+                            <div className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5">
+                                <span>{clientName}</span>
+                            </div>
+                        </div>
+
+                        <div className="hidden items-center p-2">
                             <label className="sr-only" htmlFor="client_id">Cliente</label>
                             <input autoComplete="false" readOnly type="text" id="client_id" name="client_id" value={invoiceSelected.client_id ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Cliente" />
                         </div>
