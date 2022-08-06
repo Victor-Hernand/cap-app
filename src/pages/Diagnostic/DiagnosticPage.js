@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BasicLayout from "../../components/BasicLayout";
 import BrandDropdown from "../../components/BrandDropdown";
 import ModelDropdown from "../../components/ModelDropdown";
@@ -14,12 +14,15 @@ import { postDiagnostic } from "../../services/DiagnosticService";
 import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 import ImagePreview from "../ImagePreview";
 import "react-html5-camera-photo/build/css/index.css";
+import InvoiceSearch from "../../components/InvoiceSearch";
+import { DiagnosticContext } from "../../context/Diagnostic";
 
 const DiagnosticPage = () => {
     const [categories, setCategories] = useState();
     const [pictures, setPictures] = useState([]);
     const [dataUri, setDataUri] = useState("");
     const [cameraOn, setCameraOn] = useState(false);
+    const { invoiceSelected, setInvoiceSelect } = useContext(DiagnosticContext);
     const navigate = useNavigate();
     const getExamsTypes = async () => {
         try {
@@ -29,6 +32,7 @@ const DiagnosticPage = () => {
             console.log(error);
         }
     }
+
     useEffect(() => {
         getExamsTypes();
     }, []);
@@ -95,31 +99,46 @@ const DiagnosticPage = () => {
 
     return (
         <BasicLayout>
-            <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Formulario de recepcion</h2>
+            <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Diagnóstico</h2>
+            <InvoiceSearch />
             <div className="mt-4 grid grid-cols-1 md:grid-cols-1 sm:grid-cols-1 ">
                 <div className="px-4 pb-6 sm:px-10">
                     <form method="POST" id="reception-form" onSubmit={(e) => submitReceptionForm(e)}>
-                        <CarPlateSearch />
-                        <ClientDropdown />
-                        <MechanicDropdown />
-                        <BrandDropdown />
-                        <ModelDropdown />
-
+                        <div className="flex flex-col items-center p-2">
+                            <label className="sr-only" htmlFor="car_plate">Placa</label>
+                            <input autoComplete="false" readOnly type="text" id="car_plate" name="car_plate" value={invoiceSelected.car_plate ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Placa" />
+                        </div>
+                        <div className="flex flex-col items-center p-2">
+                            <label className="sr-only" htmlFor="client_id">Cliente</label>
+                            <input autoComplete="false" readOnly type="text" id="client_id" name="client_id" value={invoiceSelected.client_id ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Cliente" />
+                        </div>
+                        <div className="flex flex-col items-center p-2">
+                            <label className="sr-only" htmlFor="mechanic_id">Técnico</label>
+                            <input autoComplete="false" readOnly type="text" id="mechanic_id" name="mechanic_id" value={invoiceSelected.mechanic_id ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Tecnico" />
+                        </div>
+                        <div className="flex flex-col items-center p-2">
+                            <label className="sr-only" htmlFor="car_brand">Marca</label>
+                            <input autoComplete="false" readOnly type="text" id="car_brand" name="car_brand" value={invoiceSelected.car_brand ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Marca" />
+                        </div>
+                        <div className="flex flex-col items-center p-2">
+                            <label className="sr-only" htmlFor="car_model">Modelo</label>
+                            <input autoComplete="false" readOnly type="text" id="car_model" name="car_model" value={invoiceSelected.car_model ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Modelo" />
+                        </div>
                         <div className="flex flex-col items-center p-2">
                             <label className="sr-only" htmlFor="car_motor">Motor</label>
-                            <input autoComplete="false" type="text" id="car_motor" name="car_motor" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Motor" />
+                            <input autoComplete="false" readOnly type="text" id="car_motor" name="car_motor" value={invoiceSelected.car_motor ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Motor" />
                         </div>
                         <div className="flex flex-col items-center p-2">
                             <label className="sr-only" htmlFor="car_year">Año</label>
-                            <input autoComplete="false" type="text" id="car_year" name="car_year" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Año" />
+                            <input autoComplete="false" readOnly type="text" id="car_year" name="car_year" value={invoiceSelected.car_year ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Año" />
                         </div>
                         <div className="flex flex-col items-center p-2">
                             <label className="sr-only" htmlFor="car_mileage">Kilometraje</label>
-                            <input autoComplete="false" type="text" id="car_mileage" name="car_mileage" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Kilometraje" />
+                            <input autoComplete="false" readOnly type="text" id="car_mileage" name="car_mileage" value={invoiceSelected.car_mileage ?? ''} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Kilometraje" />
                         </div>
                         <div className="flex flex-col items-center p-2">
                             <label className="sr-only" htmlFor="car_traction">Tracción</label>
-                            <input autoComplete="false" type="text" id="car_traction" name="car_traction" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Traccion" />
+                            <input autoComplete="false" readOnly type="text" id="car_traction" value={invoiceSelected.car_traction ?? ''} name="car_traction" className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full pl-10 p-2.5" placeholder="Traccion" />
                         </div>
 
                         <CategoriesCard categories={categories} />

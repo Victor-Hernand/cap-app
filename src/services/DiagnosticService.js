@@ -71,3 +71,16 @@ export const deleteDiagnostic = async(id) => {
         console.log(err);
     }
 }
+
+export const getInvoices = async () => {
+    try {
+        const params = await getURLParams()
+        let url = `${baseUrl}/invoices?invoice_type_id=3/${params}`
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+
+}

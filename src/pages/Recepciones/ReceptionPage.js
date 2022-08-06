@@ -90,7 +90,7 @@ const ReceptionPage = () => {
                     <form method="POST" id="reception-form" onSubmit={(e) => submitReceptionForm(e)}>
                         <CarPlateSearch />
                         <ClientDropdown />
-                        <MechanicDropdown />
+                        {/*<MechanicDropdown />*/}
                         <BrandDropdown />
                         <ModelDropdown />
 
