@@ -11,8 +11,8 @@ const InvoiceSearch = (props) => {
     const searchInvoice = (event) => {
         const search = event.target.value
         if(!search){ return setItems([]) }
-        const result = invoice.filter((item, index) => item.invoice_number.toLowerCase().indexOf(search.toLowerCase()) >= 0);
-        setItems(result)
+        const result = invoice.filter((item, index) => item.invoice_number.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||  item.car_plate?.toLowerCase().indexOf(search.toLowerCase()) >= 0);  
+        setItems(result);
     }
     const selectDocument = (item) => { 
         setInvoiceSelected(item);
@@ -33,6 +33,7 @@ const InvoiceSearch = (props) => {
     }
 
     const getClient = async () => {
+        setClientName("Cliente");
         const data = await getClients();
         setDataClient(data);
     }
@@ -61,7 +62,7 @@ const InvoiceSearch = (props) => {
                         <li key={document.id} 
                             className="text-gray-600 border-b border-gray-200 hover:bg-gray-100 p-4"
                             onClick={() => { selectDocument(document) }}>
-                                <span>{document.invoice_number}</span>
+                                <span>Factura: {document.invoice_number} Placa: {document.car_plate}</span>
                         </li>
                     )
                 }
