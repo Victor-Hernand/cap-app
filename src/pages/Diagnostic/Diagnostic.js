@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../components/BasicLayout";
-import { UserContext } from "../../context/User";
+import { UserContext } from "../../context/user";
 import CardDiagnostic from "./CardDiagnostic";
 import { getDiacnostic, searchDiagnostic } from "../../services/DiagnosticService";
 import { DiagnosticContext } from "../../context/Diagnostic";

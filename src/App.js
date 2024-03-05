@@ -5,7 +5,7 @@ import LoginPage from './pages/Auth/LoginPage';
 import NotFound from './pages/NotFound';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React from "react";
-import { UserProvider } from './context/User';
+import { UserProvider } from './context/user';
 import { ReceptionProvider } from './context/Reception';
 import { AuthMiddleware } from './components/AuthMiddleware';
 import Receptions from './pages/Recepciones/Receptions';

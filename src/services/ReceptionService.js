@@ -26,7 +26,7 @@ export const getReceptions = async (limit = 25, offset = 0) => {
 export const searchReception = async (client_name_or_invoice_number) => {
     try {
         const params = await getURLParams()
-        let url = `${baseUrl}/receptions/${client_name_or_invoice_number}?${params}`
+        let url = `${baseUrl}/receptions?search=${client_name_or_invoice_number}&${params}`
         const response = await fetch(url);
         const data = await response.json();
         return data;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { UserContext } from "../context/User";
+import { UserContext } from "../context/user";
 import { ReceptionContext } from "../context/Reception";
 const CarPlateSearch = (props) => {
     const {clients, setClients} = useContext(ReceptionContext);

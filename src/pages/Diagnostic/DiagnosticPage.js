@@ -5,13 +5,13 @@ import ModelDropdown from "../../components/ModelDropdown";
 import CarPlateSearch from "../../components/CarPlateSearch";
 import ClientDropdown from "../../components/ClientDropdown";
 import MechanicDropdown from "../../components/MechanicDropdown";
+import Camera, { IMAGE_TYPES, FACING_MODES } from "react-html5-camera-photo";
 
 import CategoriesCard from "../../components/CategoriesCard";
 import { getExams } from "../../services/CategoriesService";
 import Resizer from "react-image-file-resizer";
 import { useNavigate } from "react-router-dom";
 import { postDiagnostic } from "../../services/DiagnosticService";
-import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 import ImagePreview from "../ImagePreview";
 import "react-html5-camera-photo/build/css/index.css";
 import InvoiceSearch from "../../components/InvoiceSearch";
@@ -87,6 +87,15 @@ const DiagnosticPage = () => {
         }
     }
 
+    const handleTakePhotoAnimationDone = (dataUri) => {
+        setPictures([...pictures, dataUri]);
+        setCameraOn(false);
+      };
+    
+      const openCamera = () => {
+        setCameraOn(true);
+      };
+
     return (
         <BasicLayout>
             <h2 className="my-4 text-center font-semibold text-xl text-gray-500">Diagnóstico</h2>
@@ -144,6 +153,31 @@ const DiagnosticPage = () => {
                                 <input onChange={onFileResize} name="files" accept="image/jpeg" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileMultiple" multiple />
                             </div>
                         </div>
+                        <div className="p-2 flex">
+                        <div className="mb-3 w-96">
+                        <label
+                            htmlFor="formFileMultiple"
+                            className="form-label inline-block mb-2 font-semibold text-indigo-600"
+                        >
+                            Agregar Imagenes
+                        </label>
+                        {cameraOn ? (
+                            <Camera
+                            onTakePhotoAnimationDone={handleTakePhotoAnimationDone}
+                            idealFacingMode={FACING_MODES.ENVIRONMENT}
+                            isImageMirror={false}
+                            imageType={IMAGE_TYPES.JPG}
+                            />
+                        ) : (
+                            <button
+                            onClick={openCamera}
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            >
+                            Tomar Foto
+                            </button>
+                        )}
+                        </div>
+                    </div>
                         <div className="pr-2 float-right my-4 ">
                             <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                 Guardar

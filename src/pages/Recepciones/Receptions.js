@@ -6,7 +6,7 @@ import Pagination from "../../components/Pagination";
 import Search from "../../components/Search";
 import { getReceptions, searchReception } from "../../services/ReceptionService";
 import { useContext } from "react";
-import { UserContext } from "../../context/User";
+import { UserContext } from "../../context/user";
 import CardReception from "./CardReceptions";
 import { ReceptionContext } from "../../context/Reception";
 

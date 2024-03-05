@@ -113,6 +113,12 @@ const ShowReception = () => {
                     <h3 className="font-semibold text-gray-500">Trabajos a realizar</h3>
                     <p>{data.public_notes}</p>
                 </div>
+                {data.files && (
+                    <div className="my-4">
+                        <h3 className="font-semibold text-gray-500">Imagen</h3>
+                        <img src={data.files} alt="Descripción de la imagen" />
+                    </div>
+                )}
             </div>
 
             <div className="flex flex-col items-center justify-between my-8">

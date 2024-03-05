@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../context/User';
+import { UserContext } from '../context/user';
 const NavBar = () => {
     const [user, setUser] = useContext(UserContext);
     const [hidde, setHidde] = useState(false);
@@ -20,7 +20,7 @@ const NavBar = () => {
             <div className="flex items-center justify-between h-16">
                 <div className=" flex items-center">
                     <a className="flex-shrink-0" href="/">
-                        <img className="w-16" src="https://cap.miposvirtual.com/images/logo.png" alt="Workflow"/>
+                        <img className="w-12 h-12 rounded-full" src="https://cap.miposvirtual.com/logo/40C1elD8CG0qBUmN789isKSlmwfdjjq3.png" alt="Workflow"/>
                     </a>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">

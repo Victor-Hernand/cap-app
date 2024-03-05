@@ -27,6 +27,7 @@ const CardReception = (props) => {
                                         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Marca: {item.car_brand}</span>
                                         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Modelo: {item.car_model}</span>
                                         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Fecha: {item.reception_date}</span>
+                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Tecnico: {item.employee?item.employee.first_name+" "+item.employee.last_name:""}</span>
                                     </div>
                                 </div>
                             </Link>

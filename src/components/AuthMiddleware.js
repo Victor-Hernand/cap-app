@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../context/User";
+import { UserContext } from "../context/user";
 import { Navigate } from "react-router-dom";
 export const AuthMiddleware = ({children}) => {
     const [user] = useContext(UserContext);
